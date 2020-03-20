@@ -68,8 +68,8 @@
             var format = "YYYY-MMM-DD DDD";
             dateConvert(date,format)
         }, 1);
-        $(".btn-primary").click({url: "/punch/start_work/"}, punch);
-        $(".btn-success").click({url: "/punch/stop_work/"}, punch);
+        $(".btn-primary").click({url: "{{ url('/punch/start_work/') }}"}, punch);
+        $(".btn-success").click({url: "{{ url('/punch/stop_work/') }}"}, punch);
     });
 
     function dateConvert(dateobj, format) {
