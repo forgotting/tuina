@@ -17,7 +17,7 @@ class ExcelController extends Controller
         $punches = $punch::where('punch_year_month', $year.$month)->get();
         $cellData[] = ['日期', '上班時間', '下班時間', '請假開始時間', '請假結束時間'];
 
-        $month_days = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $month_days = $this->days_in_month($month, $year);
         //dd($punches);
 
         for($day = 1; $day <= $month_days; $day++) {
@@ -63,6 +63,12 @@ class ExcelController extends Controller
                 $sheet->rows($cellData);
             });
         })->export('xls');
+    }
+
+    public function days_in_month($month, $year)
+    {
+        // calculate number of days in a month
+        return $month == 2 ? ($year % 4 ? 28 : ($year % 100 ? 29 : ($year % 400 ? 28 : 29))) : (($month - 1) % 7 % 2 ? 30 : 31);
     }
 
 }
