@@ -56,7 +56,7 @@ class ExcelController extends Controller
             $cellData[] = [$day, $start_time, $end_time, $punch_time, $punch_end_time];
         }
         
-        $filename = $user_name .'-'. $year . $month . ".csv";
+        $filename = $year . $month .'-'. $user_name . ".csv";
         $f = fopen('php://memory', 'w'); // 寫入 php://memory
         
         foreach ($cellData as $row) {
@@ -66,6 +66,7 @@ class ExcelController extends Controller
         header('Content-Type: application/csv');
         header('Content-Disposition: attachement; filename="' . $filename . '"');
         fpassthru($f);
+        fclose($f);
     }
 
     public function days_in_month($month, $year)
