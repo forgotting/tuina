@@ -127,9 +127,9 @@ $(document).ready(function() {
             }
         },
         header: {
-            left: 'prev,next today',
-            center: 'title, excelButton',
-            right: 'punchButton'
+            left: 'prev, next today',
+            center: 'title',
+            right: 'punchButton, excelButton'
         },
         buttonText: {
             today: '今天',
