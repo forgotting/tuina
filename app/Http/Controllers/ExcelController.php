@@ -11,14 +11,55 @@ class ExcelController extends Controller
 {
     //
     public function punchExport(Request $request, $id, $year, $month) {
-        $list = array(
-            array("A1","B1","C1"),
-            array("A2","B2","C2")
-        );
+        $punch = new Punch;
+        $users = new User;
+        $user_name = $users::where('id', $id)->first()->name;
+        $punches = $punch::where('punch_year_month', $year.$month)->get();
+        $cellData[] = ['日期', '上班時間', '下班時間', '請假開始時間', '請假結束時間'];
+
+        $month_days = $this->days_in_month($month, $year);
+        //dd($punches);
+
+        for($day = 1; $day <= $month_days; $day++) {
+            $start_time = "";
+            $end_time = "";
+            $punch_time = "";
+            $punch_end_time = "";
+
+            foreach ($punches as $key => $value) {
+
+                if ($value->punch_date == $day) {
+
+                    if ($value->description == "1") {
+                        $start_time = $value->punch_time;
+                    }
+
+                    if ($value->description == "2") {
+                        $end_time = $value->punch_time;
+                    }
+                }
+
+                if ($value->description == "3") {
+
+                    if ($value->punch_date <= $day && $value->punch_end_date >= $day) {
+                        
+                        if ($value->punch_date == $day) {
+                            $punch_time = $value->punch_time;
+                        }
+
+                        if ($value->punch_end_date == $day) {
+                            $punch_end_time = $value->punch_end_time;
+                        }
+                    }
+                }
+            }
+            $cellData[] = [$day, $start_time, $end_time, $punch_time, $punch_end_time];
+        }
         
-        $filename = date("Y-m-d") . ".csv";
+        $filename = $user_name .'-'. $year . $month . ".csv";
         $f = fopen('php://memory', 'w'); // 寫入 php://memory
-        foreach ($list as $row) {
+        
+        foreach ($cellData as $row) {
             fputcsv($f, $row);
         }
         fseek($f, 0);
