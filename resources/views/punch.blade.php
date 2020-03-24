@@ -19,44 +19,60 @@
     .title a:hover {
         opacity: 0.7;
     }
+    body {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+    h3 {
+        margin-top: 2rem;
+    }
+    .row {
+        margin-bottom: 1rem;
+    }
+    .row .row {
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+    [class*="col-"] {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    hr {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
 </style>
 
 <div class="flex-center position-ref full-height">
     @include('login')
+    <div class="container title">
+        <div class="row" style="margin-top: 100px">
+            <div class="col-4">
+                <p id="display-datetime" style="text-align: center;"></p>
+                <p id="punch_year_month" style="display: none;"></p>
+                <p id="punch_date" style="display: none;"></p>
+                <p id="punch_time" style="display: none;"></p>
+            </div>
+        </div>
 
-    <div class="content">
-        <table class="table" align="center" style="width: 850px; margin-top: 100px;">
-            <thead>
-                <tr>
-                    <th scope="col" colspan="3" style="font-size: 90px; height: 100px;border-bottom: none; padding-bottom: 100px;">
-                        <p id="display-datetime" style="text-align: center;"></p>
-                        <p id="punch_year_month" style="display: none;"></p>
-                        <p id="punch_date" style="display: none;"></p>
-                        <p id="punch_time" style="display: none;"></p>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    @foreach($start_punch as $s)
-                    <td class="title" style="border-top: none;"><a href="/punch/{{ $s->id }}">{{ $s->name }}</a>
-                        <div class="links">
-                                @if (isset($s->start_time))
-                                    <button type="button" class="btn btn-primary btn-lg" disabled="true">{{ $s->start_time }}</button>
-                                @else
-                                    <button id='start' type="button" class="btn btn-primary btn-lg" value={{ $s->id }}>上班</button>
-                                @endif
-                                @if (isset($s->stop_time))
-                                    <button type="button" class="btn btn-success btn-lg" disabled="true">{{ $s->stop_time }}</button>
-                                @else
-                                    <button id='stop' type="button" class="btn btn-success btn-lg" value={{ $s->id }}>下班</button>
-                                @endif
-                        </div>
-                    </td>
-                    @endforeach
-                </tr>
-            </tbody>
-        </table>
+        <div class="row">
+        @foreach($start_punch as $s)
+        <div class="col-sm-4" style="text-align: center;"><a href="/punch/{{ $s->id }}">{{ $s->name }}</a>
+            <div class="links">
+                    @if (isset($s->start_time))
+                        <button type="button" class="btn btn-primary btn-lg" disabled="true">{{ $s->start_time }}</button>
+                    @else
+                        <button id='start' type="button" class="btn btn-primary btn-lg" value={{ $s->id }}>上班</button>
+                    @endif
+                    @if (isset($s->stop_time))
+                        <button type="button" class="btn btn-success btn-lg" disabled="true">{{ $s->stop_time }}</button>
+                    @else
+                        <button id='stop' type="button" class="btn btn-success btn-lg" value={{ $s->id }}>下班</button>
+                    @endif
+            </div>
+        </div>
+        @endforeach
+        </div>
     </div>
 </div>
 @endsection
