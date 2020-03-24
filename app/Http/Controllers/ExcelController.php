@@ -11,6 +11,23 @@ class ExcelController extends Controller
 {
     //
     public function punchExport(Request $request, $id, $year, $month) {
+        $list = array(
+            array("A1","B1","C1"),
+            array("A2","B2","C2")
+        );
+        
+        $filename = date("Y-m-d") . ".csv";
+        $f = fopen('php://memory', 'w'); // 寫入 php://memory
+        foreach ($list as $row) {
+            fputcsv($f, $row);
+        }
+        fseek($f, 0);
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachement; filename="' . $filename . '"');
+        fpassthru($f);
+    }
+
+    public function punchExport1(Request $request, $id, $year, $month) {
         $punch = new Punch;
         $users = new User;
         $user_name = $users::where('id', $id)->first()->name;
