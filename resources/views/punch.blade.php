@@ -122,11 +122,11 @@
         let $punch_date = document.getElementById("punch_date").innerHTML;
         let $punch_time = document.getElementById("punch_time").innerHTML;
         var success_result;
+        var element = this;
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            async: false,
             type: "POST",
             data: { 
                 "id" : $id , 
@@ -136,12 +136,15 @@
             },
             dataType: "json",
             url: event.data.url,
-            success:function(result){
-                success_result = result;
+            success: function(result){
+                success_result = result.punch_time;
+                $(element).text(success_result);
+                $(element).attr("disabled", true);
+            },
+            error: function(){
+                alert('error');
             }
         });
-        $(this).text(success_result);
-        $(this).attr("disabled", true);
     }
 </script>
 @stop

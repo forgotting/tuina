@@ -12,6 +12,7 @@ class PunchController extends Controller
 {
     public function index()
     {
+        dd(\Request::getClientIp());
         $now = Carbon::now();
         $punch = new Punch;
         $users = new User;
@@ -49,7 +50,7 @@ class PunchController extends Controller
         $punch->description = "1";
         $punch->save();
 
-        return response()->json($punch_time);
+        return response()->json(['punch_time' => $punch_time]);
     }
 
     public function stop(Request $request) {
