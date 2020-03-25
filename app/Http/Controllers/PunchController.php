@@ -10,9 +10,19 @@ use Carbon\Carbon;
 
 class PunchController extends Controller
 {
+    private function getIpAddress() {
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ipAddresses = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            return trim(end($ipAddresses));
+        }
+        else {
+            return $_SERVER['REMOTE_ADDR'];
+        }
+    }
+
     public function index()
     {
-        dd(\Request::ip());
+        dd($this->getIpAddress());
         $now = Carbon::now();
         $punch = new Punch;
         $users = new User;
