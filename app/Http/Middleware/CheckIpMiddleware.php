@@ -6,7 +6,7 @@ use Closure;
 
 class CheckIpMiddleware
 {
-    public $whiteIps = ['36.238.192.86', '127.0.0.1'];
+    public $whiteIps = ['36.238.192.85', '127.0.0.1'];
     /**
      * Handle an incoming request.
      *
