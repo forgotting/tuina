@@ -10,19 +10,8 @@ use Carbon\Carbon;
 
 class PunchController extends Controller
 {
-    private function getIpAddress() {
-        if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ipAddresses = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
-            return trim(end($ipAddresses));
-        }
-        else {
-            return $_SERVER['REMOTE_ADDR'];
-        }
-    }
-
     public function index()
     {
-        dd($this->getIpAddress());
         $now = Carbon::now();
         $punch = new Punch;
         $users = new User;
@@ -76,7 +65,7 @@ class PunchController extends Controller
         $punch->description = "2";
         $punch->save();
 
-        return response()->json($punch_time);
+        return response()->json(['punch_time' => $punch_time]);
     }
 
     public function user_punch($id) {
@@ -154,51 +143,7 @@ class PunchController extends Controller
             "end_time": "' . $end_punch_time . '" 
         }');
 
-        return response()->json(['event' => $event]);
-    }
-
-    public function fullCalendar() {
-        /*$events = [];
-        $data = Punch::all();
-        if($data->count()) {
-            foreach ($data as $key => $value) {
-                $events[] = Calendar::event(
-                    $value->title,
-                    true,
-                    new \DateTime($value->start_date),
-                    new \DateTime($value->end_date.' +1 day'),
-                    null,
-                    // Add color and link on event
-	                [
-	                    'color' => '#f05050',
-	                    'url' => 'pass here url and any route',
-	                ]
-                );
-            }
-        }*/
-        $events = [];
-        $punches = Punch::all();
-        $events[] = \Calendar::event(
-            "Valentine's Day", //event title
-            true, //full day event?
-            new \DateTime('2020-02-14'), //start time (you can also use Carbon instead of DateTime)
-            new \DateTime('2020-02-14'), //end time (you can also use Carbon instead of DateTime)
-            'stringEventId' //optionally, you can specify an event ID
-        );
-
-        //$eloquentEvent = EventModel::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
-
-        $calendar = \Calendar::addEvents($events) //add an array with addEvents
-            /*->addEvent($eloquentEvent, [ //set custom color fo this event
-                'color' => '#800',
-            ])*/->setOptions([ //set fullcalendar options
-                'firstDay' => 1,
-                //'defaultView' => 'agendaWeek',
-            ])/*->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-                'viewRender' => 'function() {alert("Callbacks!");}'
-            ])*/;
-        $calendar = Calendar::addEvents($events);
-        //return view('punch', compact('calendar'));
+        //return response()->json(['event' => $event]);
     }
 }
 

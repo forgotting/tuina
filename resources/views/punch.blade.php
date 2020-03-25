@@ -45,8 +45,8 @@
 
 <div class="flex-center position-ref full-height">
     @include('login')
-    <div class="container title">
-        <div class="row" style="margin-top: 100px">
+    <div class="container">
+        <div class="row title" style="margin-top: 100px">
             <div class="col-4">
                 <p id="display-datetime" style="text-align: center;"></p>
                 <p id="punch_year_month" style="display: none;"></p>
@@ -56,6 +56,14 @@
         </div>
 
         <div class="row">
+            <div class="alert alert-warning" style="display:none" id="alertIp">
+                <a href="#" class="close">
+                    &times;
+                </a><p class="errormsg"></p>
+            </div>
+        </div>
+
+        <div class="row title">
         @foreach($start_punch as $s)
         <div class="col-sm-4" style="text-align: center;"><a href="/punch/{{ $s->id }}">{{ $s->name }}</a>
             <div class="links">
@@ -121,8 +129,10 @@
         let $punch_year_month = document.getElementById("punch_year_month").innerHTML;
         let $punch_date = document.getElementById("punch_date").innerHTML;
         let $punch_time = document.getElementById("punch_time").innerHTML;
+        let $test = document.getElementById("alertIp").disabled;
         var success_result;
         var element = this;
+        var error_result;
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -138,11 +148,15 @@
             url: event.data.url,
             success: function(result){
                 success_result = result.punch_time;
+                $(".alert").hide();
                 $(element).text(success_result);
                 $(element).attr("disabled", true);
             },
-            error: function(){
-                alert('error');
+            error: function(result){
+                if (result.status === 401) {
+                    $(".alert").show();
+                    $(".errormsg").html("請確認您登入的IP" + result.responseText);
+                }             
             }
         });
     }

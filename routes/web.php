@@ -17,8 +17,8 @@ Route::get('/', function () {
 
 Route::get('/punch', 'PunchController@index');
 Route::get('/punch/{id}', 'PunchController@user_punch');
-Route::post('/punch/start_work/', 'PunchController@start');
-Route::post('/punch/stop_work/', 'PunchController@stop');
+Route::middleware('checkIp')->post('/punch/start_work/', 'PunchController@start');
+Route::middleware('checkIp')->post('/punch/stop_work/', 'PunchController@stop');
 Route::post('/punch/ajax_update', 'PunchController@ajaxUpdate');
 
 Route::get('/quote/{id}', 'QuoteController@index');
