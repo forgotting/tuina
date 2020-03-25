@@ -12,7 +12,7 @@ class PunchController extends Controller
 {
     public function index()
     {
-        dd($this->server->get('REMOTE_ADDR'));
+        dd(\Request::ip());
         $now = Carbon::now();
         $punch = new Punch;
         $users = new User;
