@@ -10,7 +10,7 @@
 @section('content')
 <style>
     .title {
-        font-size:90px;
+        font-size:80px;
     }
     .title a:link {
         color: #333333; 
@@ -62,9 +62,9 @@
                 <div class="alert_{{ $s->id }} alert-warning" style="display:none; position: absolute; width: 90%; margin-left: 3%;" id="alertIp">
                     <a href="#" class="close">
                         &times;
-                    </a><p class="errormsg_{{ $s->id }}" style="font-size: 20px;"></p>
+                    </a><p class="errormsg_{{ $s->id }}" style="font-size: 18px;"></p>
                 </div>
-                <div class="links title" style="margin-top: 5%;">
+                <div class="links title">
                         @if (isset($s->start_time))
                             <button type="button" class="btn btn-primary btn-lg" disabled="true">{{ $s->start_time }}</button>
                         @else
@@ -127,7 +127,6 @@
         let $punch_year_month = document.getElementById("punch_year_month").innerHTML;
         let $punch_date = document.getElementById("punch_date").innerHTML;
         let $punch_time = document.getElementById("punch_time").innerHTML;
-        let $test = document.getElementById("alertIp").disabled;
         var success_result;
         var element = this;
         var error_result;
@@ -146,12 +145,13 @@
             url: event.data.url,
             success: function(result){
                 success_result = result.punch_time;
-                $(".alert").hide();
+                $("[class^=alert_]").hide();
                 $(element).text(success_result);
                 $(element).attr("disabled", true);
             },
             error: function(result){
                 if (result.status === 401) {
+                    $("[class^=alert_]").hide();
                     $(".alert_"+$id).show();
                     $(".errormsg_"+$id).html("請確認您登入的IP" + result.responseText);
                 }             
