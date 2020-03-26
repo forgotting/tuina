@@ -56,29 +56,27 @@
         </div>
 
         <div class="row">
-            <div class="alert alert-warning" style="display:none" id="alertIp">
-                <a href="#" class="close">
-                    &times;
-                </a><p class="errormsg"></p>
-            </div>
-        </div>
-
-        <div class="row title">
         @foreach($start_punch as $s)
-        <div class="col-sm-4" style="text-align: center;"><a href="/punch/{{ $s->id }}">{{ $s->name }}</a>
-            <div class="links">
-                    @if (isset($s->start_time))
-                        <button type="button" class="btn btn-primary btn-lg" disabled="true">{{ $s->start_time }}</button>
-                    @else
-                        <button id='start' type="button" class="btn btn-primary btn-lg" value={{ $s->id }}>上班</button>
-                    @endif
-                    @if (isset($s->stop_time))
-                        <button type="button" class="btn btn-success btn-lg" disabled="true">{{ $s->stop_time }}</button>
-                    @else
-                        <button id='stop' type="button" class="btn btn-success btn-lg" value={{ $s->id }}>下班</button>
-                    @endif
+            <div class="col-sm-4 title" style="text-align: center;">
+                <a href="/punch/{{ $s->id }}">{{ $s->name }}</a>
+                <div class="alert_{{ $s->id }} alert-warning" style="display:none; position: absolute; width: 90%; margin-left: 3%;" id="alertIp">
+                    <a href="#" class="close">
+                        &times;
+                    </a><p class="errormsg_{{ $s->id }}" style="font-size: 20px;"></p>
+                </div>
+                <div class="links title" style="margin-top: 5%;">
+                        @if (isset($s->start_time))
+                            <button type="button" class="btn btn-primary btn-lg" disabled="true">{{ $s->start_time }}</button>
+                        @else
+                            <button id='start' type="button" class="btn btn-primary btn-lg" value={{ $s->id }}>上班</button>
+                        @endif
+                        @if (isset($s->stop_time))
+                            <button type="button" class="btn btn-success btn-lg" disabled="true">{{ $s->stop_time }}</button>
+                        @else
+                            <button id='stop' type="button" class="btn btn-success btn-lg" value={{ $s->id }}>下班</button>
+                        @endif
+                </div>
             </div>
-        </div>
         @endforeach
         </div>
     </div>
@@ -154,8 +152,8 @@
             },
             error: function(result){
                 if (result.status === 401) {
-                    $(".alert").show();
-                    $(".errormsg").html("請確認您登入的IP" + result.responseText);
+                    $(".alert_"+$id).show();
+                    $(".errormsg_"+$id).html("請確認您登入的IP" + result.responseText);
                 }             
             }
         });
