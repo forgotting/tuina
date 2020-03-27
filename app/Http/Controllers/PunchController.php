@@ -143,7 +143,7 @@ class PunchController extends Controller
             "end_time": "' . $end_punch_time . '" 
         }');
 
-        //return response()->json(['event' => $event]);
+        return response()->json(['event' => $event]);
     }
 }
 
