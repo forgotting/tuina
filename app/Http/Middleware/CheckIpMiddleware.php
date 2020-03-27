@@ -3,10 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\CheckIp;
 
 class CheckIpMiddleware
 {
-    public $whiteIps = ['36.238.192.85', '127.0.0.1'];
     /**
      * Handle an incoming request.
      *
@@ -18,7 +18,7 @@ class CheckIpMiddleware
     {
         $clientIp = $this->getIpAddress();
 
-        if (!in_array($clientIp, $this->whiteIps)) {
+        if (!in_array($clientIp, $this->getIp())) {
     
             /*
                  You can redirect to any error page. 
@@ -38,5 +38,17 @@ class CheckIpMiddleware
         else {
             return $_SERVER['REMOTE_ADDR'];
         }
+    }
+
+    private function getIp() {
+        $ips = new CheckIp;
+        $ips = $ips::where('iswhite', 1)->get();
+        $iplist = [];
+
+        foreach ($ips as $ip) {
+            $iplist[] = $ip->ip;
+        }
+
+        return $iplist;
     }
 }
