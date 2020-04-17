@@ -44,7 +44,6 @@
 </style>
 
 <div class="flex-center position-ref full-height">
-    @include('login')
     <div class="container">
         <div class="row title" style="margin-top: 100px">
             <div class="col-4">
@@ -66,12 +65,12 @@
                 </div>
                 <div class="links title">
                         @if (isset($s->start_time))
-                            <button type="button" class="btn btn-primary btn-lg" disabled="true">{{ $s->start_time }}</button>
+                            <button type="button" class="btn btn-primary btn-lg" disabled="true">上班</button>
                         @else
                             <button id='start' type="button" class="btn btn-primary btn-lg" value={{ $s->id }}>上班</button>
                         @endif
                         @if (isset($s->stop_time))
-                            <button type="button" class="btn btn-success btn-lg" disabled="true">{{ $s->stop_time }}</button>
+                            <button type="button" class="btn btn-success btn-lg" disabled="true">下班</button>
                         @else
                             <button id='stop' type="button" class="btn btn-success btn-lg" value={{ $s->id }}>下班</button>
                         @endif
@@ -144,9 +143,7 @@
             dataType: "json",
             url: event.data.url,
             success: function(result){
-                success_result = result.punch_time;
                 $("[class^=alert_]").hide();
-                $(element).text(success_result);
                 $(element).attr("disabled", true);
             },
             error: function(result){
