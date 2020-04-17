@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/punch', 'PunchController@index');
+Route::get('/punch', 'PunchController@index')->name('punch');
 Route::get('/punch/{id}', 'PunchController@user_punch');
 Route::middleware('checkIp')->post('/punch/start_work/', 'PunchController@start');
 Route::middleware('checkIp')->post('/punch/stop_work/', 'PunchController@stop');
@@ -25,3 +25,5 @@ Route::get('/quote/{id}', 'QuoteController@index');
 Route::post('/quote/{id}', 'QuoteController@count');
 
 Route::get('excel/export/punch/{id}/{year}-{month}','ExcelController@punchExport');
+
+Route::post('/login', 'UserController@login')->name('login');
