@@ -18,7 +18,9 @@
 
 <div class="flex-center position-ref full-height">
     <div class="content">
-        <div class="title m-b-md">打卡紀錄</div>
+        <div class="title m-b-md">
+            <button type="button" class="btn btn-default"><a href="{{ route('punch') }}">上一頁</a></button>
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
