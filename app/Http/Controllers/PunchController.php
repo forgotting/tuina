@@ -16,7 +16,7 @@ class PunchController extends Controller
         $punch = new Punch;
         $users = new User;
         $users = $users->get();
-        $start_punch = $punch::where('punch_date', $now->day)->get();
+        $start_punch = $punch::where('punch_date', $now->day)->where('punch_year_month', $now->format('Ym'))->get();
         
         foreach ($users as $user) {
             foreach ($start_punch as $start) {
