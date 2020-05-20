@@ -121,8 +121,16 @@ class QuoteController extends Controller
             }
         }
 
-        if ($resin_type == "resin7" && $use_script == "true") 
-            $resin_price = 14;
+        if ($resin_type == "resin7") {
+
+            if ($customer_config == "one") {
+                $resin_price = 11;
+            }
+            
+            if ($use_script == "true") {
+                $resin_price = 14;
+            }
+        }
 
         return $resin_price;
     }
