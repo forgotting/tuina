@@ -47,13 +47,13 @@
                         </ul>
                     </div>
                 </td>
-                <td width="50" style="background-color: #5bc0de; color:#ffffff">
+                <td width="50" style="background-color: #5bc0de; color:#ffffff;">
                     @if (isset($customer_name))
                         <h3>{{ $customer_name }}</h3>
                     @endif
                 </td>
-                <td width="150" colspan="4">
-                    <p class="word_style" style="padding-top: 10px;">
+                <td width="150" colspan="4" style="background-color: #5bc0de;">
+                    <p class="word_style" style="padding-top: 10px; color:#ffffff;">
                         樹脂版：
                         @if (isset($resin_price))
                             {{ $resin_price }}元
