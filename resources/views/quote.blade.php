@@ -30,13 +30,6 @@
         {{ Form::hidden('id', Request::route('id')) }}
         <table border="1">
             <tr>
-                <td colspan="6">
-                    @if (isset($customer_name))
-                        <h2>{{ $customer_name }}</h2>
-                    @endif
-                </td>
-            </tr>
-            <tr>
                 <td rowspan="6" width="200">
                     <div class="dropdown">
                         <button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown">
@@ -54,7 +47,12 @@
                         </ul>
                     </div>
                 </td>
-                <td width="200" colspan="5">
+                <td width="50">
+                    @if (isset($customer_name))
+                        <h2>{{ $customer_name }}</h2>
+                    @endif
+                </td>
+                <td width="150" colspan="4">
                     <p class="word_style" style="padding-top: 10px;">
                         樹脂版：
                         @if (isset($resin_price))
