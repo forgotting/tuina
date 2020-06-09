@@ -18,6 +18,9 @@
         width: 80%; 
         font-size: 30px;
     }
+    h2 {
+        color: #f4511e;
+    }
 </style>
 
 <div class="flex-center position-ref full-height">
@@ -26,6 +29,13 @@
         {!! Form::open(['url' => '/quote/'.Request::route('id'), 'method' => 'post']) !!}
         {{ Form::hidden('id', Request::route('id')) }}
         <table border="1">
+            <tr>
+                <td colspan="6">
+                    @if (isset($customer_name))
+                        <h2>{{ $customer_name }}</h2>
+                    @endif
+                </td>
+            </tr>
             <tr>
                 <td rowspan="6" width="200">
                     <div class="dropdown">
