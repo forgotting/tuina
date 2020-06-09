@@ -19,7 +19,7 @@
         font-size: 30px;
     }
     h2 {
-        color: #f4511e;
+        
     }
 </style>
 
@@ -47,9 +47,9 @@
                         </ul>
                     </div>
                 </td>
-                <td width="50">
+                <td width="50" style="background-color: #5bc0de; color:#ffffff">
                     @if (isset($customer_name))
-                        <h2>{{ $customer_name }}</h2>
+                        <h3>{{ $customer_name }}</h3>
                     @endif
                 </td>
                 <td width="150" colspan="4">
