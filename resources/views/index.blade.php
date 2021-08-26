@@ -65,12 +65,12 @@
 
     <div class="content">
         <div class="title m-b-md">
-            丞德文創
+            王氏針法穴道薈萃
         </div>
 
         <div class="links">
-            <a href="/quote/1">報價</a>
-            <a href="/punch">打卡</a>
+            <a href="/acupoint">穴道</a>
+            <a href="/login">Login</a>
             <a href="/admin">Admin</a>
         </div>
     </div>

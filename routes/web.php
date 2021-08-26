@@ -27,3 +27,5 @@ Route::post('/quote/{id}', 'QuoteController@count');
 Route::get('excel/export/punch/{id}/{year}-{month}','ExcelController@punchExport');
 
 Route::post('/login', 'UserController@login')->name('login');
+
+Route::get('/acupoint', 'AcupointController@index');

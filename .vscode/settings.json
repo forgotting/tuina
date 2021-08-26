@@ -1,0 +1,8 @@
+{
+    "i18n-ally.localesPaths": [
+        "resources/lang",
+        "admin/resources/lang",
+        "public/js/locale",
+        "admin/public/js/locale"
+    ]
+}

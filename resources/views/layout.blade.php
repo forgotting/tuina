@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <title>丞德 - @yield('title')</title>
+        <title>王氏針法穴道薈萃 - @yield('title')</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,12 +22,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>                        
                 </button>
-                <a class="navbar-brand" href="/" style="font-size: 30px;">丞德</a>
+                <a class="navbar-brand" href="/" style="font-size: 30px;">王氏針法穴道薈萃</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/quote/1">報價</a></li>
-                    <li><a href="/punch">打卡</a></li>
+                    <li><a href="/login">Login</a></li>
                     <li><a href="/admin">Admin</a></li>
                 </ul>
                 </div>
@@ -90,9 +89,9 @@
             @yield('content')
         </section>
 
-        <footer>
+        <!--footer>
             <div id="copyright text-right" style="margin-top: 5%;">© Copyright 2020</div>
-        </footer>
+        </footer-->
     </body>
     <section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

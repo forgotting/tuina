@@ -18,4 +18,7 @@
  *
  */
 
+Use Encore\Admin\Admin;
+
+Admin::js("js/acupoint.js");
 Encore\Admin\Form::forget(['map', 'editor']);
